@@ -7,19 +7,19 @@
 
 <p>
   <strong>Url:</strong>
-  <%= link_to 'Visit URL', @link.url, class: "btn btn-primary" %>
+  <%= @link.url %>
 </p>
 
  
       <%= link_to like_link_path(@link), method: :put, class: "btn btn-default btn-sm" do %>
-        <span class="glyphicon glyphicon-chevron-up"></span>
+        <span class="glyphicon glyphicon-thumbs-up"></span>
         Upvote
         <%= @link.get_upvotes.size %>
       <% end %>
 
 
       <%= link_to dislike_link_path(@link), method: :put, class: "btn btn-default btn-sm" do %>
-        <span class="glyphicon glyphicon-chevron-down">
+        <span class="glyphicon glyphicon-thumbs-down">
         Downvote
         <%= @link.get_downvotes.size %>
       <% end %>
@@ -33,25 +33,29 @@
       	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
       	<textarea name="comment[body]"></textarea>
       	<br>
-      	<input type='submit' value="Add comment" >
+      	<input type='submit' value="Add comment" class="btn btn-primary" >
       </form>
   	</p>
       <br>
     <% if @link.comments %>  
   	<% @link.comments.each do |x| %>
-  		<%= x.user.email %> 
+  		<ul class="list-group">
+  		<strong><%= x.user.name %></strong>
   		<br>
-
+  		Submitted <%= time_ago_in_words(x.created_at) %> 
+  		<br>
   		<%= x.body %> 
+ 
+  		
   		<form action='/comments/<%= x.id %>' method="POST">
       	<input type='hidden' name='comment[link_id]' value="<%= @link.id %>">
       	<input type='hidden' name='comment[comment_id]' value="<%= x.id %>">
       	<input type="hidden"name="_method"value="delete">
       	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
       	<br>
-      	<input type='submit' value="Delete comment" >
-      </form>
-  		<br>
+      	<input type='submit' class="btn btn-danger" value="Delete comment" >
+      	</form>
+  		</ul>
   		<br>
   	<% end %>
   	<% end %> 

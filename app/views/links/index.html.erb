@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Links</h1>
-
 <table style="width:100%">
   <thead>
     <tr>
@@ -18,25 +16,22 @@
       <tr>
     <td>
       <%= link_to like_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
-        <span class="glyphicon glyphicon-chevron-up"></span>
+        <span class="glyphicon glyphicon-thumbs-up"></span>
         Upvote
         <%= link.get_upvotes.size %>
       <% end %>
     </td>
     <td>
       <%= link_to dislike_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
-        <span class="glyphicon glyphicon-chevron-down">
+        <span class="glyphicon glyphicon-thumbs-down">
         Downvote
         <%= link.get_downvotes.size %>
       <% end %>
     </td>
-        <td><%= link.title %></td>
+        <td><a href="links/<%= link.id %>"><%= link.title %></a></td>
         <td><%= link.url %></td>
-        <td> Submitted <%= time_ago_in_words(link.created_at) %> by <%= link.user.email %></td> 
-
-
-
-        <td><%= link_to 'Show', link %></td>
+        <td><a href="links/<%= link.id %>"><%= link.comments.count %></a> Comments</td>
+        <td> Submitted <%= time_ago_in_words(link.created_at) %> by <%= link.user.name %></td> 
          
         <% if link.user == current_user %> 
         <td><%= link_to 'Edit', edit_link_path(link) %></td>
