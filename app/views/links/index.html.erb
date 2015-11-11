@@ -2,9 +2,11 @@
 
 <h1>Listing Links</h1>
 
-<table style="width:60%">
+<table style="width:100%">
   <thead>
     <tr>
+      <th></th>
+      <th></th>
       <th>Title</th>
       <th>Url</th>
       <th colspan="3"></th>
@@ -14,15 +16,33 @@
   <tbody>
     <% @links.each do |link| %>
       <tr>
+    <td>
+      <%= link_to like_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
+        <span class="glyphicon glyphicon-chevron-up"></span>
+        Upvote
+        <%= link.get_upvotes.size %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to dislike_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
+        <span class="glyphicon glyphicon-chevron-down">
+        Downvote
+        <%= link.get_downvotes.size %>
+      <% end %>
+    </td>
         <td><%= link.title %></td>
         <td><%= link.url %></td>
         <td> Submitted <%= time_ago_in_words(link.created_at) %> by <%= link.user.email %></td> 
+
+
 
         <td><%= link_to 'Show', link %></td>
          
         <% if link.user == current_user %> 
         <td><%= link_to 'Edit', edit_link_path(link) %></td>
         <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+
 
         <% end %> 
       </tr>
