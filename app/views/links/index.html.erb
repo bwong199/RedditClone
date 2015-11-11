@@ -2,7 +2,7 @@
 
 <h1>Listing Links</h1>
 
-<table>
+<table style="width:60%">
   <thead>
     <tr>
       <th>Title</th>
@@ -16,12 +16,14 @@
       <tr>
         <td><%= link.title %></td>
         <td><%= link.url %></td>
+        <td> Submitted <%= time_ago_in_words(link.created_at) %> by <%= link.user.email %></td> 
 
         <td><%= link_to 'Show', link %></td>
          
         <% if link.user == current_user %> 
         <td><%= link_to 'Edit', edit_link_path(link) %></td>
         <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
         <% end %> 
       </tr>
     <% end %>

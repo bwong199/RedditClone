@@ -7,7 +7,7 @@
 
 <p>
   <strong>Url:</strong>
-  <%= @link.url %>
+  <%= link_to 'Visit URL', @link.url, class: "btn btn-primary" %>
 </p>
 
 <%= link_to 'Edit', edit_link_path(@link) %> |
