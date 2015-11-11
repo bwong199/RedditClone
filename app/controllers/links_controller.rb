@@ -12,17 +12,15 @@ class LinksController < ApplicationController
   def show
   end
 
-  # GET /links/new
   def new
     @link = current_user.links.build
   end
 
-  # GET /links/1/edit
+
   def edit
   end
 
-  # POST /links
-  # POST /links.json
+
   def create
     @link = current_user.links.build(link_params)
 

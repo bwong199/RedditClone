@@ -23,7 +23,40 @@
         Downvote
         <%= @link.get_downvotes.size %>
       <% end %>
-<br>
+
+      <%= @link.comments.count %> Comments
+
+      <br>
+     <p>
+      <form action='/links/<%= @link.id %>/comments' method="POST">
+      	<input type='hidden' name='comment[link_id]' value="<%= @link.id %>">
+      	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      	<textarea name="comment[body]"></textarea>
+      	<br>
+      	<input type='submit' value="Add comment" >
+      </form>
+  	</p>
+      <br>
+    <% if @link.comments %>  
+  	<% @link.comments.each do |x| %>
+  		<%= x.user.email %> 
+  		<br>
+
+  		<%= x.body %> 
+  		<form action='/comments/<%= x.id %>' method="POST">
+      	<input type='hidden' name='comment[link_id]' value="<%= @link.id %>">
+      	<input type='hidden' name='comment[comment_id]' value="<%= x.id %>">
+      	<input type="hidden"name="_method"value="delete">
+      	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      	<br>
+      	<input type='submit' value="Delete comment" >
+      </form>
+  		<br>
+  		<br>
+  	<% end %>
+  	<% end %> 
+	<br>
+	<br>
 
 <%= link_to 'Edit', edit_link_path(@link) %> |
 <%= link_to 'Back', links_path %>
