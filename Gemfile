@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.0.0'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
@@ -10,6 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'devise'
 gem 'hirb'
 gem 'simple_form'
+gem 'rails_12factor'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
