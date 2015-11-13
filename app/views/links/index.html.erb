@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% @links.each do |link| %>
+    <% @links.order(:cached_votes_total).reverse.each do |link| %>
       <tr>
     <td>
       <%= link_to like_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
